@@ -1,0 +1,24 @@
+<table class='table'>
+  <tr><%= image_tag user.get_profile_image, size:'100x100' %></tr>
+  <tr>
+	  <th>name</th>
+	  <th><%= user.name %></th>
+  </tr>
+
+  <tr>
+	  <th>introduction</th>
+	  <th><%= user.introduction %></th>
+  </tr>
+
+  <tr>
+    <!--~path(user)でuserという引数を持っていかなければならない-->
+    <td><%= link_to "#{user.followings.count}フォロー数", user_followings_path(user) %></td>
+    <td><%= link_to "#{user.followers.count}フォロワー数", user_followers_path(user) %></td>
+  </tr>
+</table>
+
+<div class='row'>
+  <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
+    <i class="fas fa-user-cog"></i>
+  <% end %>
+</div>

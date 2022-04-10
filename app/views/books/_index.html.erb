@@ -1,0 +1,36 @@
+<table class='table table-hover table-inverse'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% books.each do |book| %>
+      <tr>
+        <td><%= link_to(book.user) do %>
+          <%= image_tag book.user.get_profile_image, size:'50x50' %>
+          <% end %>
+        </td>
+        <td><%= link_to book.title,book, class: "book_#{book.id}" %></td>
+        <td><%= book.body %></td>
+        <% if book.favorited_by?(current_user) %>
+           <p>
+           <td><%= link_to book_favorites_path(book), method: :delete do %>
+              ❤️<%= book.favorites.count %>　いいね
+              <% end %></td>
+           </p>
+            <% else %>
+           <p><td>
+             <%= link_to book_favorites_path(book), method: :post do %>
+              ♡<%= book.favorites.count %> いいね
+              <% end %>
+           </td></p>
+          <% end %>
+          <td><%= link_to "#{book.book_comments.count}コメント",book_path(book.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
