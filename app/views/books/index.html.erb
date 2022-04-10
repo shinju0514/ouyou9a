@@ -19,6 +19,7 @@
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
+      <%= link_to "閲覧数", books_path(impressions_count: "true") %>
       <%= render 'index', books: @books_favo %>
     </div>
   </div>
